@@ -5,7 +5,7 @@
 
 ## Project Overview
 
-This project implements a Genetic Algorithm (GA) for optimizing color palettes to approximate images with a limited number of colors. The GA evolves palettes to minimize the difference between the original and compressed image, using metrics like PSNR (Peak Signal-to-Noise Ratio).
+This project implements a Genetic Algorithm (GA) for optimizing color palettes to approximate images with a limited number of colors. The GA evolves palettes to minimize the difference between the original and compressed image, using metrics like PSNR (Peak Signal-to-Noise Ratio). For a detailed explanation of the methodology and results, refer to the report in the docs folder.
 
 ---
 
