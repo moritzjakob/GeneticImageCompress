@@ -189,3 +189,137 @@ If you have questions or need further help running or extending the code, feel f
 
 
 
+
+# ImageCompression
+
+# Genetic Algorithm for Color Palette Optimization
+
+## Project Overview
+
+This project implements a Genetic Algorithm (GA) to optimize color palettes and approximate images with a limited number of colors. The GA evolves palettes to minimize the difference between the original and compressed image using metrics like PSNR (Peak Signal-to-Noise Ratio).
+
+---
+
+## Folder Structure
+
+* `images/` — input images for experiments
+* `experiments/results/` — GA output images after optimization
+* `experiments/ImagesReport/` — images generated for the report
+* `genetic_algorithm/` — GA implementation files
+
+  * `ga.py` — main GA logic
+  * `fitness.py` — fitness evaluation functions
+  * `crossover_operators.py` — crossover operators
+  * `mutation_operators.py` — mutation operators
+  * `individual.py` — individual representation
+  * `__init__.py` — package initializer
+* `utils/` — utility functions
+
+  * `image_io.py` — image loading, saving, visualization
+  * `color_palette_utils.py` — palette generation
+* `requirements.txt` — Python packages needed
+* `main.py` — entry point to run the GA
+* `docs/project_report.pdf` — full project report in PDF format
+
+---
+
+## Installation and Setup
+
+1. Install required packages:
+
+```
+pip install -r requirements.txt
+```
+
+2. Run the genetic algorithm:
+
+```
+python main.py
+```
+
+### Modify Parameters in `main.py`
+
+* `image_path` — path to input image
+* `fitness_function` — `compute_fitness_psnr` or `compute_fitness_mse`
+* GA parameters: `num_colors`, `max_generations`, `population_size`
+* Crossover and mutation functions
+
+---
+
+## Usage Example
+
+```
+from utils.image_io import load_image, save_image
+from genetic_algorithm.ga import run_genetic_algorithm
+from genetic_algorithm.fitness import compute_fitness_psnr
+from genetic_algorithm.crossover_operators import random_crossover
+from genetic_algorithm.mutation_operators import mutate_palette_random
+from utils.color_palette_utils import generate_palettes
+
+image = load_image("images/bird.jpg")
+palettes = generate_palettes(num_colors_per_palette=16)
+
+palette, result_image, history = run_genetic_algorithm(
+    image=image,
+    num_colors=16,
+    max_generations=50,
+    population_size=20,
+    crossover_prob=0.85,
+    mutation_prob=0.2,
+    fixed_palette=palettes,
+    fitness_function=compute_fitness_psnr,
+    crossover_function=random_crossover,
+    mutation_function=mutate_palette_random,
+    target_fitness=50
+)
+
+save_image(result_image, "experiments/results/bird_result.jpg")
+```
+
+---
+
+## Experiments and Tests
+
+### Baseline Configuration
+
+* Number of colors: 16
+* Max generations: 50
+* Population size: 20
+* Crossover probability: 0.85
+* Mutation probability: 0.2
+* Input image: `bird.jpg`
+* Fitness function: `compute_fitness_psnr`
+* Mutation function: `mutate_palette_random`
+* Target fitness: 50
+* Random seed: 45
+* Runs: 5
+
+### Tests Performed
+
+* **Crossover Tests:** Random, Segmented, Uniform, BLX-alpha
+* **Mutation Tests:** Random, Gaussian, Component-wise, Random Reset
+* **Population Tests:** Small, Medium, Large
+* **Crossover & Mutation Probabilities:** Varied values
+* **Max Generations:** 50, 150, 300
+* **Palette Sizes:** 8, 16, 64 for different images
+
+---
+
+## Reproducing Experiments
+
+1. Modify `main.py` parameters or create experiment scripts.
+2. Set desired crossover/mutation operators.
+3. Run multiple iterations to save images, runtime, and fitness.
+4. Outputs saved in `experiments/results/`, including palette visualizations.
+
+**Notes:**
+
+* `compute_fitness_psnr` returns a negative PSNR score (GA minimizes fitness).
+* Random seed: 45 for reproducibility.
+* `final_palette.png` shows the best palette with metadata.
+
+---
+
+## 📄 Additional Resources
+
+* [Project Report PDF](docs/Jakob_Moritz_Image_Compression.pdf) — full report with details of the experiments
