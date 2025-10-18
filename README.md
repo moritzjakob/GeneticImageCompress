@@ -188,6 +188,6 @@ The final_palette.png image is generated at the end of the GA run showing the be
 If you have questions or need further help running or extending the code, feel free to reach out!
 ---
 
-## 📄 Additional Resources
+## Additional Resources
 
 * [Project Report PDF](docs/Jakob_Moritz_Image_Compression.pdf) — full report with details of the experiments
